@@ -1,12 +1,13 @@
 @font-face {
   font-family: logo-font;
-  src: url("contender.otf");
+  src: url("fonts/contender.otf");
 }
 
 :root {
   --white-font: rgb(235, 235, 235);
   --main-bg-color: rgb(213, 213, 213);
   --form-bg-color: rgb(255, 255, 255);
+  --transparent-bg-color: rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -48,7 +49,7 @@ header h2 {
 }
 
 header > div:first-child {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--transparent-bg-color);
   margin-top: 80px;
   padding: 10px;
   width: 100%;
@@ -59,6 +60,10 @@ header > div:first-child {
 }
 header > div:last-child {
   margin-bottom: 10px;
+}
+
+.container {
+  max-width: 520px;
 }
 
 main,
@@ -76,7 +81,37 @@ main > div {
   padding: 2rem;
 }
 
+main > div:first-child > div {
+  align-self: end;
+}
+main > div:nth-of-type(2) > div {
+  align-self: center;
+}
+
 main > div:has(form) {
   background-color: var(--form-bg-color);
+}
+
+input {
   display: block;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 3rem;
+}
+
+.program-introduction p {
+  font-size: clamp(1rem, 1.5vw, 1.8rem);
+}
+
+.program-introduction p:first-child,
+.form-container h2 {
+  margin-bottom: 20px;
+}
+
+label {
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
 }
