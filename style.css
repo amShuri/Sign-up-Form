@@ -1,0 +1,82 @@
+@font-face {
+  font-family: logo-font;
+  src: url("contender.otf");
+}
+
+:root {
+  --white-font: rgb(235, 235, 235);
+  --main-bg-color: rgb(213, 213, 213);
+  --form-bg-color: rgb(255, 255, 255);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 15px;
+}
+
+body {
+  display: flex;
+  min-height: 100svh;
+}
+
+header,
+header a {
+  color: var(--white-font);
+}
+
+header {
+  width: 100%;
+  max-width: 400px;
+  background: url("images/bg.jpg") no-repeat;
+  background-size: cover;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h2 {
+  font-family: logo-font;
+  font-size: 5rem;
+}
+
+header > div:first-child {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-top: 80px;
+  padding: 10px;
+  width: 100%;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header > div:last-child {
+  margin-bottom: 10px;
+}
+
+main,
+main > div {
+  flex: 1;
+  display: flex;
+}
+
+main {
+  flex-direction: column;
+}
+
+main > div {
+  background-color: var(--main-bg-color);
+  padding: 2rem;
+}
+
+main > div:has(form) {
+  background-color: var(--form-bg-color);
+  display: block;
+}
