@@ -6,8 +6,16 @@
 :root {
   --white-font: rgb(235, 235, 235);
   --main-bg-color: rgb(213, 213, 213);
-  --form-bg-color: rgb(255, 255, 255);
   --transparent-bg-color: rgba(0, 0, 0, 0.5);
+
+  --form-bg-color: rgb(255, 255, 255);
+  --input-border-color: rgb(185, 185, 185);
+  --invalid-input-color: rgb(230, 61, 61);
+  --invalid-input-bg-color: rgb(245, 185, 185);
+  --valid-input-color: rgb(51, 150, 26);
+  --valid-input-bg-color: rgb(170, 230, 170);
+  --input-outline: rgb(80, 165, 214);
+  --form-font-size: clamp(0.9rem, 1vw, 1rem);
 }
 
 * {
@@ -26,6 +34,7 @@ body {
   min-height: 100svh;
 }
 
+/* header styles */
 header,
 header a {
   color: var(--white-font);
@@ -33,7 +42,7 @@ header a {
 
 header {
   width: 100%;
-  max-width: 400px;
+  max-width: 460px;
   background: url("images/bg.jpg") no-repeat;
   background-size: cover;
 
@@ -61,22 +70,21 @@ header > div:first-child {
 header > div:last-child {
   margin-bottom: 10px;
 }
+/* end of header styles */
 
+/* container and main styles */
 .container {
-  max-width: 520px;
-}
-
-main,
-main > div {
-  flex: 1;
-  display: flex;
+  max-width: 650px;
 }
 
 main {
+  flex: 1;
+  display: flex;
   flex-direction: column;
 }
 
 main > div {
+  flex: 1;
   background-color: var(--main-bg-color);
   padding: 2rem;
 }
@@ -91,27 +99,98 @@ main > div:nth-of-type(2) > div {
 main > div:has(form) {
   background-color: var(--form-bg-color);
 }
+/* end of container and main styles */
 
-input {
-  display: block;
-}
-
-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem 3rem;
-}
-
+/* main's sections styles */
+/* introduction section */
 .program-introduction p {
   font-size: clamp(1rem, 1.5vw, 1.8rem);
 }
 
 .program-introduction p:first-child,
 .form-container h2 {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+}
+
+/* form section */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 3.5rem;
 }
 
 label {
+  display: inline-block;
+  font-size: var(--form-font-size);
   letter-spacing: 0.8px;
+  margin-bottom: 4px;
+  margin-left: 1px;
   text-transform: uppercase;
 }
+
+input {
+  appearance: none;
+  border: 1px solid var(--input-border-color);
+  border-radius: 6px;
+  display: block;
+  height: 34px;
+  padding-left: 6px;
+  width: 250px;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid var(--input-outline);
+  box-shadow: 1px 1px 2px rgb(0, 0, 0, 0.2);
+}
+
+.output-msg {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+}
+.output-msg::after {
+  font-size: var(--form-font-size);
+  position: absolute;
+  margin-top: -12px;
+  margin-left: 3px;
+  max-width: 250px;
+}
+
+/* valid input */
+input:valid + .output-msg {
+  color: var(--valid-input-color);
+}
+input:not(:placeholder-shown):valid {
+  background-color: var(--valid-input-bg-color);
+  border-color: var(--valid-input-color);
+}
+input:not(:placeholder-shown):valid + .output-msg::after {
+  content: "Your input is good!";
+}
+/* end of valid input */
+
+/* invalid input */
+input:invalid + .output-msg {
+  color: var(--invalid-input-color);
+}
+input:not(:placeholder-shown):invalid {
+  background-color: var(--invalid-input-bg-color);
+  border-color: var(--invalid-input-color);
+}
+
+input[type="text"]:not(:placeholder-shown):invalid + .output-msg::after {
+  content: "Names must contain letters only."
+}
+input[type="email"]:not(:placeholder-shown):invalid + .output-msg::after {
+  content: "Valid format: email@example.com";
+}
+input[type="tel"]:not(:placeholder-shown):invalid + .output-msg::after {
+  content: "Phone number must be 10 digits long.";
+}
+input[type="password"]:not(:placeholder-shown):invalid + .output-msg::after {
+  content: "Password must be at least 8 characters long.";
+}
+/* end of invalid input */
+
+/* button section */ 
