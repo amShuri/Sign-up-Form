@@ -4,18 +4,20 @@
 }
 
 :root {
-  --white-font: rgb(235, 235, 235);
+  /* COLORS */
+  --form-bg-color: rgb(255, 255, 255);
+  --invalid-bg-color: rgb(245, 185, 185);
+  --invalid-color: rgb(230, 61, 61);
   --main-bg-color: rgb(213, 213, 213);
   --transparent-bg-color: rgba(0, 0, 0, 0.5);
+  --valid-bg-color: rgb(170, 230, 170);
+  --valid-color: rgb(51, 150, 26);
+  --white-font: rgb(235, 235, 235);
 
-  --form-bg-color: rgb(255, 255, 255);
-  --input-border-color: rgb(185, 185, 185);
-  --invalid-input-color: rgb(230, 61, 61);
-  --invalid-input-bg-color: rgb(245, 185, 185);
-  --valid-input-color: rgb(51, 150, 26);
-  --valid-input-bg-color: rgb(170, 230, 170);
-  --input-outline: rgb(80, 165, 214);
+  /* FONT SIZE & BORDERS */
   --form-font-size: clamp(0.9rem, 1vw, 1rem);
+  --input-border: 1px solid rgb(185, 185, 185);
+  --input-outline: 2px solid rgb(44, 132, 247);
 }
 
 * {
@@ -34,7 +36,7 @@ body {
   min-height: 100svh;
 }
 
-/* header styles */
+/* Header section start */
 header,
 header a {
   color: var(--white-font);
@@ -67,130 +69,155 @@ header > div:first-child {
   justify-content: center;
   align-items: center;
 }
+
 header > div:last-child {
   margin-bottom: 10px;
 }
-/* end of header styles */
+/* Header section end */
 
-/* container and main styles */
+/* Main section start */
 .container {
   max-width: 650px;
 }
 
-main {
+main,
+main > div {
   flex: 1;
   display: flex;
+}
+
+main {
   flex-direction: column;
 }
 
 main > div {
-  flex: 1;
   background-color: var(--main-bg-color);
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 main > div:first-child > div {
   align-self: end;
 }
-main > div:nth-of-type(2) > div {
+
+main > div:nth-child(2) > div {
   align-self: center;
 }
 
 main > div:has(form) {
   background-color: var(--form-bg-color);
 }
-/* end of container and main styles */
 
-/* main's sections styles */
-/* introduction section */
+/* Introduction start */
 .program-introduction p {
   font-size: clamp(1rem, 1.5vw, 1.8rem);
 }
 
-.program-introduction p:first-child,
-.form-container h2 {
-  margin-bottom: 15px;
+.program-introduction p:first-child {
+  margin-bottom: 20px;
 }
+/* Introduction end */
 
-/* form section */
+/* Form start */
 form {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem 3.5rem;
+  gap: 0.8rem 3rem;
+  margin-top: 10px;
 }
 
 label {
   display: inline-block;
   font-size: var(--form-font-size);
   letter-spacing: 0.8px;
-  margin-bottom: 4px;
-  margin-left: 1px;
+  margin: 0 0 2px 2px;
   text-transform: uppercase;
 }
 
-input {
+label,
+button {
+  cursor: pointer;
+}
+
+input,
+button {
   appearance: none;
-  border: 1px solid var(--input-border-color);
+}
+
+input {
+  border: var(--input-border);
   border-radius: 6px;
   display: block;
+  font-size: var(--form-font-size);
   height: 34px;
+  outline: none;
   padding-left: 6px;
-  width: 250px;
+  width: 300px;
 }
 
 input:focus {
-  outline: none;
-  border: 1px solid var(--input-outline);
+  border: var(--input-outline);
   box-shadow: 1px 1px 2px rgb(0, 0, 0, 0.2);
+}
+/* Form end */
+
+/* Form Validation start */
+input:not(:placeholder-shown):valid {
+  border: 2px solid var(--valid-color);
+  background-color: var(--valid-bg-color);
+}
+
+input:not(:placeholder-shown):invalid {
+  border: 2px solid var(--invalid-color);
+  background-color: var(--invalid-bg-color);
 }
 
 .output-msg {
-  display: inline-block;
+  height: 15px;
+  margin: 2px 0 0 12px;
+  max-width: 300px;
+}
+
+.output-msg > .validation {
+  display: none;
+  margin-left: 5px;
   position: relative;
-  width: 100%;
 }
-.output-msg::after {
-  font-size: var(--form-font-size);
+
+.output-msg> .validation::after {
+  content: ' ';
+  height: 18px;
+  left: -18px;
   position: absolute;
-  margin-top: -12px;
-  margin-left: 3px;
-  max-width: 250px;
+  width: 18px;
 }
 
-/* valid input */
 input:valid + .output-msg {
-  color: var(--valid-input-color);
+  color: var(--valid-color);
 }
-input:not(:placeholder-shown):valid {
-  background-color: var(--valid-input-bg-color);
-  border-color: var(--valid-input-color);
-}
-input:not(:placeholder-shown):valid + .output-msg::after {
-  content: "Your input is good!";
-}
-/* end of valid input */
 
-/* invalid input */
 input:invalid + .output-msg {
-  color: var(--invalid-input-color);
-}
-input:not(:placeholder-shown):invalid {
-  background-color: var(--invalid-input-bg-color);
-  border-color: var(--invalid-input-color);
+  color: var(--invalid-color);
 }
 
-input[type="text"]:not(:placeholder-shown):invalid + .output-msg::after {
-  content: "Names must contain letters only."
+input:not(:placeholder-shown) + .output-msg > .validation {
+  display: block;
 }
-input[type="email"]:not(:placeholder-shown):invalid + .output-msg::after {
-  content: "Valid format: email@example.com";
-}
-input[type="tel"]:not(:placeholder-shown):invalid + .output-msg::after {
-  content: "Phone number must be 10 digits long.";
-}
-input[type="password"]:not(:placeholder-shown):invalid + .output-msg::after {
-  content: "Password must be at least 8 characters long.";
-}
-/* end of invalid input */
 
-/* button section */ 
+input:not(:placeholder-shown):valid + .output-msg > .validation::after {
+  background: url("images/valid.png") left/18px;
+}
+
+input:not(:placeholder-shown):invalid + .output-msg > .validation::after {
+  background: url("images/invalid.png") left/18px;
+}
+/* Form validation end */
+
+/* Button start */ 
+button {
+  border-radius: 6px;
+  height: 38px;
+  margin-bottom: 20px;
+  width: 180px;
+}
+/* Button end */
+/* Main section end */
