@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
   <title>Sign-up Form</title>
 </head>
 <body>
@@ -39,19 +40,23 @@
         <h2>
           Let's do this!
         </h2>
+        <p aria-hidden="true">
+          Fields marked with an asterisk (<span>*</span>) are required.
+        </p>
         <form action="#" id="the-form">
           <div>
             <label for="first-name">First Name</label>
             <input 
             type="text" 
+            class="input"
             id="first-name" 
             name="first-name" 
-            placeholder="Thor" 
             pattern="[a-zA-Z]+" 
             required
             >
             <div class="output-msg">
-              <span class="validation">Name contains letters only</span>
+              <span class="validation invalid-msg" aria-live="hint">Names must contain letters only</span>
+              <span class="validation valid-msg" aria-live="hint">Good! Your input is correct!</span>
             </div>
           </div>
     
@@ -59,13 +64,14 @@
             <label for="last-name">Last Name</label>
             <input 
             type="text" 
+            class="input"
             id="last-name" 
             name="last-name" 
             pattern="[a-zA-Z]+" 
-            placeholder="Odinson"
             >
             <div class="output-msg">
-              <span class="validation">Name contains letters only</span>
+              <span class="validation invalid-msg" aria-live="hint">Names must contain letters only</span>
+              <span class="validation valid-msg" aria-live="hint">Good! Your input is correct!</span>
             </div>
           </div>
             
@@ -73,13 +79,14 @@
             <label for="email">Email</label>
             <input 
             type="email" 
+            class="input"
             id="email" 
             name="email" 
-            placeholder="email@example.com" 
             required
             >
             <div class="output-msg">
-              <span class="validation">Valid format: email@example.com</span>
+              <span class="validation invalid-msg" aria-live="hint">Valid format: email@example.com</span>
+              <span class="validation valid-msg" aria-live="hint">Good! Your email is correct!</span>
             </div>
           </div>
             
@@ -87,13 +94,14 @@
             <label for="phone-number">Phone Number</label>
             <input 
             type="tel" 
+            class="input"
             id="phone-number" 
             name="phone-number" 
-            placeholder="0123456789" 
             pattern="[0-9]{10}"
             >
             <div class="output-msg">
-              <span class="validation">Phone number is 10 digits long</span>
+              <span class="validation invalid-msg" aria-live="hint">Phone number must be 10 digits long</span>
+              <span class="validation valid-msg" aria-live="hint">Good! Your phone number is correct!</span>
             </div>
           </div>
             
@@ -101,14 +109,15 @@
             <label for="password">Password</label>
             <input 
             type="password" 
+            class="input"
             id="password" 
             name="password" 
-            pattern="[a-zA-Z0-9\W]{6,}" 
-            placeholder="Enter your password" 
+            pattern="(?=^.{8,}$)(?=.*[A-Z]).*$" 
             required
             >
             <div class="output-msg">
-              <span class="validation">Password has at least 6 characters</span>
+              <span class="validation invalid-msg" aria-live="hint">Password must be at least 8 characters long and contain an uppercase letter</span>
+              <span class="validation valid-msg" aria-live="hint">Good! Your password meets the requirements!</span>
             </div>
           </div>
             
@@ -118,10 +127,12 @@
             type="password" 
             id="confirm-password"
             name="password"
-            pattern="[a-zA-Z0-9\W]{6,}"
-            placeholder="Re-enter your password"
             required
             >
+            <div class="output-msg">
+              <span class="validation valid-msg" aria-live="hint">Passwords match!</span>
+              <span class="validation invalid-msg" aria-live="hint">Passwords do not match!</span>
+            </div>
           </div>
           </div>
         </form>
