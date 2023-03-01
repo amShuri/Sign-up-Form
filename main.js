@@ -42,5 +42,9 @@ form.addEventListener('submit', (e) => {
   if(password[0].value !== password[1].value) {
     e.preventDefault();
     password[1].focus();
+    password[1].style.animationName = 'passwordMatch';
+    setTimeout(() => {
+      password[1].style.animationName = '';
+    }, 1000);
   }
 })
