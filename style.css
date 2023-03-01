@@ -11,7 +11,8 @@
   --transparent-bg-color: rgba(0, 0, 0, 0.5);
   --valid-color: rgb(72, 187, 43);
   --white-font: rgb(235, 235, 235);
-  --required-color: rgb(231, 0, 0);
+  --required-field-color: rgb(231, 0, 0);
+  --optional-field-color: rgb(128, 128, 128);
 
   /* FONT SIZE & BORDERS */
   --form-font-size: clamp(0.9rem, 1vw, 1rem);
@@ -44,7 +45,7 @@ header a {
 header {
   width: 100%;
   max-width: 460px;
-  background: url("images/bg.jpg") no-repeat;
+  background: url("images/bg.jpg") no-repeat center;
   background-size: cover;
 
   display: flex;
@@ -93,6 +94,9 @@ main > div {
   background-color: var(--main-bg-color);
   padding: 1.5rem;
 }
+main > div:nth-child(2) {
+  background-color: #fff;
+}
 
 main > div:first-child > div {
   align-self: end;
@@ -120,12 +124,13 @@ main > div:has(form) {
 form {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8rem 3rem;
+  gap: 0 3rem;
   margin-top: 10px;
 }
 
-.form-container p > span {
-  color: var(--required-color);
+h2 + p > span {
+  display: inline-block;
+  margin-bottom: 6px;
 }
 
 label {
@@ -136,15 +141,14 @@ label {
   text-transform: uppercase;
 }
 
-label::after {
-  content: ' (optional)';
+h2 + p > span,
+label > span[aria-hidden="true"] {
+  color: var(--required-field-color);
+}
+label > span.optional {
+  color: var(--optional-field-color);
   text-transform: lowercase;
   font-style: italic;
-}
-
-div:has(input:required) > label::after {
-  content: ' *';
-  color: var(--required-color);
 }
 
 label,
@@ -187,21 +191,25 @@ input:focus {
 
 .output-msg {
   height: 15px;
-  margin: 2px 0 0 12px;
-  max-width: 280px;
+  margin-left: 12px;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.output-msg > span,
+.output-msg > span::after {
+  position: absolute;
 }
 
 .output-msg > .validation {
   display: none;
   margin-left: 5px;
-  position: relative;
+  margin-top: 3px;
 }
-
 .output-msg > .validation::after {
   content: ' ';
   height: 18px;
   left: -18px;
-  position: absolute;
   top: 0;
   width: 18px;
 }
@@ -239,3 +247,60 @@ button {
 }
 /* Button end */
 /* Main section end */
+
+
+/* "Password do not match" animation start */
+#confirm-password {
+  animation-duration: 1s;
+  animation-name: '';
+  position: relative;
+}
+
+@keyframes password-mismatch {
+  0% {left: -3px; right: -3px}
+  5% {left: 0; right: 0}
+  10% {left: -3px; right: -3px}
+  15% {left: 0; right: 0}
+  20% {left: -3px; right: -3px}
+  25% {left: 0; right: 0}
+  30% {left: -3px; right: -3px}
+  35% {left: 0; right: 0}
+  40% {left: -3px; right: -3px}
+  45% {left: 0; right: 0}
+}
+/* "Password do not match" animation end */
+
+/* Media queries start */
+@media screen and (max-width: 1164px) {
+  /*this background style is temporary, I don't like it*/
+  body {
+    background: url("images/bg.jpg") no-repeat center/100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 720px;
+  }
+
+  body, .container {
+    margin: 0 auto;
+  }
+
+  header {
+    max-width: none;
+  }
+  header > div:first-child {
+    margin-top: 25px;
+  }
+}
+
+@media screen and (max-width: 689px) {
+  form, .account-button {
+    justify-content: center;
+  }
+  h2, p {
+    text-align: center;
+  }
+  .input#password + .output-msg {
+    margin-bottom: 28px;
+  }
+}
+/* Media queries end */
