@@ -4,20 +4,23 @@ const password = document.querySelectorAll('input[type="password"]');
 const passwordMatch = document.querySelector('#confirm-password + .output-msg > .valid-msg').style;
 const passwordMismatch = document.querySelector('#confirm-password + .output-msg > .invalid-msg').style;
 
+/**
+ * This loop will prevent the auto-styling 
+ * of any valid or invalid field by updating
+ * the input's class
+ */ 
 input.forEach((item) => {
   if(item.value === '') {
     item.className = '';
   }
-})
-for(let i = 0; i < input.length; i++) {
-  input[i].addEventListener('input', () => {
-    if(input[i].value !== '') {
-      input[i].className = 'input';
+  item.addEventListener('input', () => {
+    if(item.value !== '') {
+      item.className = 'input';
     } else {
-      input[i].className = '';
+      item.className = '';
     }
   })
-}
+})
 
 for(let i = 0; i < password.length; i++) {
   password[i].addEventListener('input', () => {
@@ -42,7 +45,7 @@ form.addEventListener('submit', (e) => {
   if(password[0].value !== password[1].value) {
     e.preventDefault();
     password[1].focus();
-    password[1].style.animationName = 'passwordMatch';
+    password[1].style.animationName = 'password-mismatch';
     setTimeout(() => {
       password[1].style.animationName = '';
     }, 1000);
