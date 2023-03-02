@@ -14,12 +14,14 @@
 <body>
   <header>
     <div>
-      <img src="images/odin-lined.png" alt="Odin Logo" width="100" height="100">
+      <img src="images/odin-lined.png" alt="Odin Logo" width="105" height="140">
       <h2 class="header__logo">ODIN</h2>
     </div>
     <div>
-      Photo by <a href="https://unsplash.com/@nguiney?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Nik Guiney</a>
-      on <a href="https://unsplash.com/photos/AFAJrekYoS8?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+      <p>
+        Photo by <a href="https://unsplash.com/@steven_st22?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Steven Shi</a>
+        on <a href="https://unsplash.com/photos/gK6TBZzCREc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+      </p>
     </div>
   </header>
 
@@ -27,22 +29,27 @@
     <div class="program-introduction">
       <div class="container">
         <p>
-          This is not a real online service! You know you need something like this in your life to help you realize your deepest dreams. Sign up now  to get started.
+          This is not a real online service! You know you need something like this in your life to help you realize your deepest dreams.
         </p>
         <p>
-          You know you want to.
+          Sign up <span>now</span> to get started.
+        </p>
+        <p>
+          You <span>know</span> you want to.
         </p>
       </div>
     </div>
 
     <div class="form-container">
       <div class="container">
-        <h2>
-          Let's do this!
-        </h2>
-        <p aria-hidden="true">
-          Fields marked with an asterisk (<span>*</span>) are required.
-        </p>
+        <div class="form-introduction">
+          <h2>
+            Let's do this!
+          </h2>
+          <p aria-hidden="true">
+            Fields marked with an asterisk <span>*</span> are required.
+          </p>
+        </div>
         <form action="#" id="the-form">
           <div>
             <label for="first-name">First Name<span aria-hidden="true"> *</span></label>
@@ -55,8 +62,8 @@
             required
             >
             <div class="output-msg">
-              <span class="validation invalid-msg" aria-live="hint">Names must contain letters only</span>
-              <span class="validation valid-msg" aria-live="hint">Good! Your input is correct!</span>
+              <span class="validation invalid-msg" aria-live="polite">Names must contain letters only</span>
+              <span class="validation valid-msg" aria-live="polite">Good! Your input is correct!</span>
             </div>
           </div>
     
@@ -70,8 +77,8 @@
             pattern="[a-zA-Z]+" 
             >
             <div class="output-msg">
-              <span class="validation invalid-msg" aria-live="hint">Names must contain letters only</span>
-              <span class="validation valid-msg" aria-live="hint">Good! Your input is correct!</span>
+              <span class="validation invalid-msg" aria-live="polite">Names must contain letters only</span>
+              <span class="validation valid-msg" aria-live="polite">Good! Your input is correct!</span>
             </div>
           </div>
             
@@ -85,8 +92,8 @@
             required
             >
             <div class="output-msg">
-              <span class="validation invalid-msg" aria-live="hint">Valid format: email@example.com</span>
-              <span class="validation valid-msg" aria-live="hint">Good! Your email is correct!</span>
+              <span class="validation invalid-msg" aria-live="polite">Valid format: email@example.com</span>
+              <span class="validation valid-msg" aria-live="polite">Good! Your email is correct!</span>
             </div>
           </div>
             
@@ -100,8 +107,8 @@
             pattern="[0-9]{10}"
             >
             <div class="output-msg">
-              <span class="validation invalid-msg" aria-live="hint">Phone number must be 10 digits long</span>
-              <span class="validation valid-msg" aria-live="hint">Good! Your phone number is correct!</span>
+              <span class="validation invalid-msg" aria-live="polite">Phone number must be 10 digits long</span>
+              <span class="validation valid-msg" aria-live="polite">Good! Your phone number is correct!</span>
             </div>
           </div>
             
@@ -116,8 +123,8 @@
             required
             >
             <div class="output-msg">
-              <span class="validation invalid-msg" aria-live="hint">Password must be at least 8 characters long and contain an uppercase letter</span>
-              <span class="validation valid-msg" aria-live="hint">Good! Your password meets the requirements!</span>
+              <span class="validation invalid-msg" aria-live="polite">Password must be at least 8 characters long and contain an uppercase letter</span>
+              <span class="validation valid-msg" aria-live="polite">Good! Your password meets the requirements!</span>
             </div>
           </div>
             
@@ -130,16 +137,15 @@
             required
             >
             <div class="output-msg">
-              <span class="validation valid-msg" aria-live="hint">Passwords match!</span>
-              <span class="validation invalid-msg" aria-live="hint">Passwords do not match!</span>
+              <span class="validation valid-msg" aria-live="polite">Passwords match!</span>
+              <span class="validation invalid-msg" aria-live="polite">Passwords do not match!</span>
             </div>
-          </div>
           </div>
         </form>
       </div>
     </div>
 
-    <div class="account-button">
+    <div class="create-account">
       <div class="container">
         <button type="submit" form="the-form">Create Account</button>
         <p>
