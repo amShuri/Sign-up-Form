@@ -4,20 +4,22 @@
 }
 
 :root {
-  /* COLORS */
+  /* FONT & BG COLORS */
+  --button-bg-color: rgb(156, 74, 44);
   --form-bg-color: rgb(255, 255, 255);
-  --invalid-color: rgb(248, 112, 48);
-  --main-bg-color: rgb(213, 213, 213);
-  --transparent-bg-color: rgba(0, 0, 0, 0.5);
-  --valid-color: rgb(72, 187, 43);
-  --white-font: rgb(235, 235, 235);
-  --required-field-color: rgb(231, 0, 0);
+  --main-bg-color: linear-gradient(-190deg, rgb(247, 247, 247, 0.6) 20%, rgb(255, 236, 224, 0.4) 100%);
+  --transparent-bg-color: rgba(0, 0, 0, 0.45);
+  --required-field-color: rgb(248, 48, 48);
   --optional-field-color: rgb(128, 128, 128);
+  --valid-color: rgb(72, 187, 43);
+  --invalid-color: rgb(248, 48, 48);
+  --white-font: rgb(235, 235, 235);
 
-  /* FONT SIZE & BORDERS */
-  --form-font-size: clamp(0.9rem, 1vw, 1rem);
+  /* BORDERS & SHADOWS */
   --input-border: 1px solid rgb(185, 185, 185);
-  --input-outline: 1px solid rgb(44, 132, 247);
+  --input-outline: 1px solid rgb(63, 161, 241);
+  --input-outline: 1px solid #ffa07d;
+  --dim-shadow: 2px 2px 3px rgb(0, 0, 0, 0.2);
 }
 
 * {
@@ -36,48 +38,63 @@ body {
   min-height: 100svh;
 }
 
+a:hover,
+a:focus,
+button:hover,
+button:focus {
+  filter: brightness(115%);
+}
+a:active,
+button:active {
+  filter: brightness();
+}
+
 /* Header section start */
 header,
 header a {
   color: var(--white-font);
 }
+header a:focus {
+  color: #da754a;
+}
 
 header {
-  width: 100%;
-  max-width: 460px;
   background: url("images/bg.jpg") no-repeat center;
   background-size: cover;
+  max-width: 450px;
+  position: relative;
+  width: 100%;
 
   display: flex;
+  justify-content: space-around;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
 }
-
 header h2 {
   font-family: logo-font;
-  font-size: 5rem;
+  font-size: 4.5rem;
+  letter-spacing: 4px;
 }
 
-header > div:first-child {
-  background-color: var(--transparent-bg-color);
-  margin-top: 80px;
-  padding: 10px;
-  width: 100%;
-  
+header > div {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-header > div:last-child {
-  margin-bottom: 10px;
+header > div:first-child {
+  background-color: var(--transparent-bg-color);
+  padding: 15px;
+  margin-top: -60px;
+}
+header > div:last-child p {
+  position: absolute;
+  bottom: 0;
+  margin: 5px;
 }
 /* Header section end */
 
 /* Main section start */
 .container {
-  max-width: 650px;
+  max-width: 570px;
 }
 
 main,
@@ -85,59 +102,60 @@ main > div {
   flex: 1;
   display: flex;
 }
-
 main {
   flex-direction: column;
 }
-
 main > div {
-  background-color: var(--main-bg-color);
-  padding: 1.5rem;
+  background: rgb(253, 249, 246);
+  background: var(--main-bg-color);
+  padding: 1.5rem 2.2rem;
 }
-main > div:nth-child(2) {
-  background-color: #fff;
+main > .form-container {
+  background: #fff;
+  background-color: var(--form-bg-color);
+  box-shadow: 0 2px 4px rgb(0, 0, 0, 0.25);
 }
-
-main > div:first-child > div {
-  align-self: end;
-}
-
-main > div:nth-child(2) > div {
+main > .form-container > div {
   align-self: center;
 }
-
-main > div:has(form) {
-  background-color: var(--form-bg-color);
+main > .program-introduction > div {
+  align-self: end;
 }
 
 /* Introduction start */
 .program-introduction p {
-  font-size: clamp(1rem, 1.5vw, 1.8rem);
+  font-size: clamp(1.2rem, 1.3vw, 1.8rem);
 }
-
-.program-introduction p:first-child {
-  margin-bottom: 20px;
+.program-introduction p:last-child {
+  margin-top: 20px;
+}
+.program-introduction span {
+  font-style: italic;
 }
 /* Introduction end */
 
 /* Form start */
+.form-container {
+  padding-bottom: 0;
+}
+.form-container h2 {
+  margin-bottom: 4px;
+}
+.form-container p {
+  margin-bottom: 16px;
+}
+
 form {
   display: flex;
   flex-wrap: wrap;
   gap: 0 3rem;
-  margin-top: 10px;
-}
-
-h2 + p > span {
-  display: inline-block;
-  margin-bottom: 6px;
+  margin: 10px 0;
 }
 
 label {
-  display: inline-block;
-  font-size: var(--form-font-size);
-  letter-spacing: 0.8px;
-  margin: 0 0 2px 2px;
+  font-size: 0.85rem;
+  letter-spacing: 0.9px;
+  margin-left: 2px;
   text-transform: uppercase;
 }
 
@@ -145,6 +163,7 @@ h2 + p > span,
 label > span[aria-hidden="true"] {
   color: var(--required-field-color);
 }
+
 label > span.optional {
   color: var(--optional-field-color);
   text-transform: lowercase;
@@ -155,7 +174,6 @@ label,
 button {
   cursor: pointer;
 }
-
 input,
 button {
   appearance: none;
@@ -165,16 +183,15 @@ input {
   border: var(--input-border);
   border-radius: 6px;
   display: block;
-  font-size: var(--form-font-size);
+  font-size: 1rem;
   height: 34px;
   outline: none;
   padding-left: 6px;
-  width: 300px;
+  width: 260px;
 }
-
 input:focus {
   border: var(--input-outline);
-  box-shadow: 1px 1px 2px rgb(0, 0, 0, 0.2);
+  box-shadow: var(--dim-shadow);
 }
 /* Form end */
 
@@ -183,69 +200,73 @@ input:focus {
 .input.password-match {
   border: 1px solid var(--valid-color);
 }
-
 .input:invalid,
 .input.password-mismatch {
   border: 1px solid var(--invalid-color);
 }
 
 .output-msg {
-  height: 15px;
-  margin-left: 12px;
-  margin-bottom: 18px;
+  font-size: 0.9rem;
+  height: 32px;
+  margin-left: 18px;
+  margin-top: 2px;
   position: relative;
 }
-
+.output-msg > span {
+  display: none;
+}
 .output-msg > span,
 .output-msg > span::after {
   position: absolute;
 }
-
-.output-msg > .validation {
-  display: none;
-  margin-left: 5px;
-  margin-top: 3px;
-}
-.output-msg > .validation::after {
-  content: ' ';
+.output-msg > span::after {
+  content: '';
   height: 18px;
   left: -18px;
-  top: 0;
+  top: -1px; /* make sure this is valid for any browser */
   width: 18px;
 }
-
-.output-msg > .valid-msg {
+.output-msg > span.valid-msg {
   color: var(--valid-color);
 }
-
-.output-msg > .invalid-msg {
+.output-msg > span.invalid-msg {
   color: var(--invalid-color);
 }
 
-.input:valid + .output-msg > .valid-msg,
-.input:invalid + .output-msg > .invalid-msg {
+.input:valid + .output-msg > span.valid-msg,
+.input:invalid + .output-msg > span.invalid-msg {
   display: block;
 }
-
 .input:valid + .output-msg > span::after,
 .input.password-match + .output-msg > span::after {
   background: url("images/valid-icon.png") left/18px;
 }
-
 .input:invalid + .output-msg > span::after,
 .input.password-mismatch + .output-msg > span::after {
   background: url("images/invalid-icon.png") left/18px;
 }
 /* Form validation end */
 
-/* Button start */ 
+/* Create account start */ 
 button {
-  border-radius: 6px;
-  height: 38px;
+  background-color: var(--button-bg-color);
+  border: none;
+  border-radius: 8px;
+  box-shadow: var(--dim-shadow);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  height: 42px;
   margin-bottom: 20px;
-  width: 180px;
+  width: 200px;
 }
-/* Button end */
+
+.create-account a {
+  color: #d16e4a;
+  font-weight: bold;
+  text-decoration: none;
+}
+/* Create account end */
 /* Main section end */
 
 
@@ -271,36 +292,43 @@ button {
 /* "Password do not match" animation end */
 
 /* Media queries start */
-@media screen and (max-width: 1164px) {
-  /*this background style is temporary, I don't like it*/
+@media screen and (max-width: 1080px) {
   body {
-    background: url("images/bg.jpg") no-repeat center/100%;
-    display: flex;
     flex-direction: column;
-    max-width: 720px;
   }
-
-  body, .container {
-    margin: 0 auto;
-  }
-
   header {
     max-width: none;
   }
+
   header > div:first-child {
-    margin-top: 25px;
+    margin: 25px 0;
+  }
+
+  .container {
+    margin: 0 auto;
   }
 }
 
-@media screen and (max-width: 689px) {
-  form, .account-button {
-    justify-content: center;
-  }
+@media screen and (max-width: 630px) {
   h2, p {
     text-align: center;
   }
+  
+  form, .account-button {
+    justify-content: center;
+  }
+
+  input {
+    width: 280px;
+  }
   .input#password + .output-msg {
-    margin-bottom: 28px;
+    margin-bottom: 5px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  input {
+    width: 220px;
   }
 }
 /* Media queries end */
